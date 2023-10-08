@@ -1,13 +1,9 @@
 package com.library.management.librarymanager.models;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.util.List;
 
 
 @Entity
@@ -28,6 +24,18 @@ public class Book {
     @NotNull
     @Size(min = 1, max = 500)
     private String genre;
+
+
+    @ManyToOne
+    private Language language;
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
 
     public String getAuthor() {
         return author;
