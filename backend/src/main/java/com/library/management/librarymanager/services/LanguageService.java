@@ -12,7 +12,7 @@ import org.springframework.validation.Validator;
 
 @Service
 public class LanguageService {
-    @Autowired    
+    @Autowired
     private LanguageRepository languageRepository;
 
     public Language createLanguage(String name, String brief) {
@@ -23,20 +23,24 @@ public class LanguageService {
         return language;
     }
 
-    public Optional<Language> findLanguageById(Long languageId) {
-        return languageRepository.findById(languageId);
+    public Language getLanguage(Long id){
+        Language language = this.findLanguageById(id);
+        return language;
     }
 
-
     public String deleteLanguage(Long id) {
-        Optional<Language> language = this.findLanguageById(id);
-        if(language == null) {
-            throw new IllegalArgumentException("Language not found");
-        }
-
-        Language languageToDelete = language.orElse(new Language());
-        languageRepository.delete(languageToDelete);
+        Language language = this.findLanguageById(id);
+        languageRepository.delete(language);
         return "Deleted language";
+    }
+
+    public Language findLanguageById (Long languageId) throws IllegalArgumentException {
+
+        Optional<Language> language = languageRepository.findById(languageId);
+        Language foundLanguage = language.orElseThrow(
+                () -> new IllegalArgumentException("Language not found"));
+
+        return foundLanguage;
 
     }
 }

@@ -39,6 +39,17 @@ public class LanguageController {
         return ResponseEntity.status(HttpStatus.CREATED).body("New language saved");
     }
 
+    @GetMapping(path="/get/{id}")
+    public ResponseEntity<?> getLanguage(@PathVariable Long id) {
+        Language language;
+        try {
+            language = languageService.getLanguage(id);
+            return ResponseEntity.ok(language);
+        } catch (Exception exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping(path="/list")
     public @ResponseBody Iterable<Language> getAllLanguages() {
         return languageRepository.findAll();
