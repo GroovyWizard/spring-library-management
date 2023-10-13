@@ -29,6 +29,11 @@ public class Book {
     @ManyToOne
     private Language language;
 
+
+    public Integer getId() {
+        return id;
+    }
+
     public Language getLanguage() {
         return language;
     }
