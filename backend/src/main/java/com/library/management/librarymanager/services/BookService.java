@@ -2,6 +2,7 @@ package com.library.management.librarymanager.services;
 
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +34,12 @@ public class BookService {
         return book;
     }
 
-    public Book getBook(Integer id) {
+    public Book getBook(Long id) {
         Book book = this.findBookById(id);
         return book;
     }
 
-    public Book findBookById(Integer bookId) throws IllegalArgumentException {
+    public Book findBookById(Long bookId) throws IllegalArgumentException {
         Optional<Book> book = bookRepository.findById(bookId);
         Book foundBook = book.orElseThrow(
             () -> new IllegalArgumentException("Book not found"));

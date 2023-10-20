@@ -3,6 +3,8 @@ package com.library.management.librarymanager.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,7 +12,7 @@ import java.util.List;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
 
     @NotNull
@@ -28,12 +30,23 @@ public class Book {
 
     @ManyToOne
     private Language language;
+    
+    @OneToMany(mappedBy = "book")
+    private List<Borrowing> borrowings = new ArrayList<>();
+    
+    public List<Borrowing> getBorrowings() {
+		return borrowings;
+	}
+    
+    public void setBorrowings(List<Borrowing> borrowings) {
+		this.borrowings = borrowings;
+	}
 
 
-    public Integer getId() {
-        return id;
-    }
-
+    public Long getId() {
+		return id;
+	}
+    
     public Language getLanguage() {
         return language;
     }
